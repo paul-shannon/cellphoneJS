@@ -22,11 +22,16 @@
   "author": "Paul Shannon",
   "license": "MIT",
   "devDependencies": {
+    "html-webpack-plugin": "^2.24.1",
     "webpack": "^1.14.0"
   },
   "dependencies": {
     "cytoscape": "^2.7.13",
     "jQuery": "^1.7.4",
     "jquery-ui": "^1.12.1"
-  }
+  },
+  "scripts": {
+    "build": "webpack"
+     }
+
 }

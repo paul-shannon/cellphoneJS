@@ -1,0 +1,32 @@
+{
+  "name": "cellphoneJS",
+  "version": "0.1.0",
+  "description": "Cellphone network simulator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paul-shannon/cellphoneJS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/paul-shannon/webpack-demo/issues"
+  },
+  "keywords": [
+    "network",
+    "biology",
+    "simulation",
+    "cellphone"
+  ],
+  "author": "Paul Shannon",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^1.14.0"
+  },
+  "dependencies": {
+    "cytoscape": "^2.7.13",
+    "jQuery": "^1.7.4",
+    "jquery-ui": "^1.12.1"
+  }
+}

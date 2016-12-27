@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <title>cyjse </title>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+   <script
+      src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+      integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+      crossorigin="anonymous"></script>
+   <script src="http://cytoscape.github.io/cytoscape.js/api/cytoscape.js-latest/cytoscape.min.js"></script>
+   <script src="network.json"></script>
+   <script src="vizmap.json"></script>
+   <script src="app.js"></script>
+<style>
+html {
+  height: 98%;
+  }
+body {
+  height: 100%;
+  }
+
+#menubarDiv{
+  margin: auto;
+  width: 98%;
+  height: 30px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  background-color: #EEE;
+  display: block;
+}
+#cyDiv{
+  margin: auto;
+  margin-top: 2px;
+  width: 98%;
+  height: 90%;
+  border: 1px solid #444;
+  border-radius:5px;
+  display: block;
+  }
+
+.menubarButton{
+   margin-top: 5px;
+   margin-left: 2px;
+   font-size: 14px;
+   }
+   
+</style>
+</head>
+<body>
+<div id="outermostDiv">
+  <div id="menubarDiv">
+     
+    <button class="menubarButton" id="restoreButton">Restore</button>
+    <button class="menubarButton" id="fitButton">Fit</button>
+    <button class="menubarButton" id="fitSelectedButton">Fit Selected</button>
+    <button class="menubarButton" id="clearSelectionsButton">Clear</button>
+    <button class="menubarButton" id="sfnButton">SFN</button>
+  </div>
+  <div id="cyDiv"></div>
+</div>  
+</body>
+</html>

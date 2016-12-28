@@ -1,18 +1,25 @@
 //----------------------------------------------------------------------------------------------------
 function handleWindowResize ()
 {
-   console.log("handleWindowResize");
-   
+   console.log("--- entering handleWindowResize");
+   console.log("outermostDiv: " + outermostDiv.width());   
+   console.log("mainDiv:    " + mainDiv.width());   
+   console.log("cyDiv:      " + cyDiv.width());   
+
    outermostDiv.width(0.98 * $(window).width());
    menubarDiv.width(outermostDiv.width());
    mainDiv.width(outermostDiv.width());
 
-   controlsDiv.width = 0.25 * outermostDiv.width()
+   controlsDiv.width(0.25 * outermostDiv.width());
    controlsDiv.height(0.98 * $(window).height());
-   cyDiv.width(0.75 * mainDiv.width())
-
+   //cyDiv.width(0.75 * mainDiv.width())
    var newHeight = $(window).height() - (menubarDiv.height() + 20);
+    cyDiv.width(0.75 * outermostDiv.width());
    cyDiv.height(newHeight)
+   console.log("--- leaving handleWindowResize");
+   console.log("outermostDiv: " + outermostDiv.width());   
+   console.log("mainDiv:    " + mainDiv.width());   
+   console.log("cyDiv:      " + cyDiv.width());   
 
 } // handleWindowResize
 //--------------------------------------------------------------------------------
@@ -21,7 +28,7 @@ $(document).ready(function() {
    $(window).resize(handleWindowResize);
    mainDiv = $("#mainDiv");
    controlsDiv = $("#controlsDiv");
-   outermostDiv = $("#outermostDiv);
+   outermostDiv = $("#outermostDiv");
    menubarDiv = $("#menubarDiv");
    $('.dropdown-submenu a.test').on("click", function(e){
      $(this).next('ul').toggle();

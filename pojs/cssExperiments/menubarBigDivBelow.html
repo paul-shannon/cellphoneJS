@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <title>cyjs cellphone simulator </title>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+   <script
+      src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+      integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+      crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+html {
+  height: 98%;
+  }
+body {
+  height: 100%;
+  }
+
+#outermostDiv{
+  padding: 2px;
+  overflow: hidden;
+  }
+
+#menubarDiv{
+  margin: auto;
+  margin-bottom: 3px;
+  width: 98%;
+  height: 40px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  background-color: #EEE;
+  }
+
+#cyDiv{
+  margin: auto;
+  width: 98%;
+  height: 95%;
+  border: 1px solid #444;
+  border-radius:5px;
+  }
+
+.menubarButton{
+   margin-top: 7px;
+   margin-left: 5px;
+   font-size: 14px;
+   }
+   
+</style>
+<script>
+//----------------------------------------------------------------------------------------------------
+function handleWindowResize ()
+{
+   console.log("--- entering handleWindowResize");
+   console.log("outermostDiv: " + outermostDiv.width());   
+   console.log("cyDiv:      " + cyDiv.width());   
+
+   var newHeight = $(window).height() - (menubarDiv.height() + 20);
+   //cyDiv.width(0.75 * outermostDiv.width());
+   cyDiv.height(newHeight)
+
+   console.log("--- leaving handleWindowResize");
+   console.log("outermostDiv: " + outermostDiv.width());   
+   console.log("cyDiv:      " + cyDiv.width());   
+
+} // handleWindowResize
+//--------------------------------------------------------------------------------
+$(document).ready(function(){
+   console.log("document ready");
+   $(window).resize(handleWindowResize);
+   cyDiv = $("#cyDiv");
+   outermostDiv = $("#outermostDiv");
+   menubarDiv = $("#menubarDiv");
+   handleWindowResize();
+   });
+//----------------------------------------------------------------------------------------------------
+</script>
+
+</head>
+<body>
+<div id="outermostDiv">
+    <div id="menubarDiv">
+       <button class="menubarButton" id="knockoutButton">Knockout</button>
+       <button class="menubarButton" id="restoreButton">Restore</button>
+       <button class="menubarButton" id="phoneTreeButton">Phone Tree...</button>
+       <button class="menubarButton" id="shortestPathButton">Shortest Path</button>
+       <button class="menubarButton" id="resetGraphButton">Reset Graph</button>
+       <button class="menubarButton" id="helpButton">Help</button>
+       <button class="menubarButton" id="fitButton">Fit</button>
+       <button class="menubarButton" id="fitSelectedButton">Fit Selected</button>
+       <button class="menubarButton" id="clearSelectionsButton">Clear</button>
+       <button class="menubarButton" id="sfnButton">SFN</button>
+       </div> <!-- menubarDiv -->
+     <div id="cyDiv"></div>
+</div> <!-- outermostDiv -->
+</body>
+</html>

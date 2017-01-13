@@ -1,4 +1,5 @@
-default:
-	npm run build  && open build/index.html
+pack:
+	npm run build
 
-        
+open:
+	open build/index.html

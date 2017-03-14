@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Cellphone Simulator</title>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="http://cytoscape.github.io/cytoscape.js/api/cytoscape.js-latest/cytoscape.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <link rel="stylesheet" type="text/css"
+          href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+
+
+    <script src="network.json"></script>
+    <script src="vizmap.json"></script>
+    <script src="app.js"></script>
+
+<style>
+
+.dropdown-submenu {
+   position: relative;
+   }
+
+.dropdown-submenu .dropdown-menu {
+   top: 0;
+   left: 100%;
+    margin-top: -1px;
+    }
+
+#outermostDiv{
+  padding: 2px;
+  overflow: hidden;
+  }
+
+#menubarDiv{
+  margin: auto;
+  margin-bottom: 3px;
+  width: 98%;
+  height: 40px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  background-color: #EEE;
+  }
+
+#cyDiv{
+  margin: auto;
+  width: 98%;
+  height: 95%;
+  border: 1px solid #444;
+  border-radius:5px;
+  }
+
+.menubarButton{
+   margin-top: 7px;
+   margin-left: 5px;
+   font-size: 14px;
+   }
+
+.navbar-btn: {
+    color: #FFF;
+    background-color: #DDDDDD !important;
+    border-color: #2E6DA4 !important;
+    }
+
+.navbar-btn:hover {
+    color: #FFF;
+    background-color: #337AB7 !important;
+    border-color: #2E6DA4 !important;
+    }
+
+</style>
+
+</head>
+
+<body role="document">
+
+<!--
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">cellphone simulator</a>
+      </div>
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="http://systemsbiology.org" target="_blank">Institute for Systems Biology</a>
+              </li>
+              <li>
+                <a href="https://www.systemsbiology.org/education-outreach/systems-education-experiences"
+                   target="_blank">Systems Education Experiences</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      <button class="btn navbar-btn btn-outline-primary">Shortest Path</button>
+      <button class="btn navbar-btn btn-outline-primary">Reset</button>
+      <button class="btn navbar-btn btn-outline-primary">Fit</button>
+      <button class="btn navbar-btn btn-outline-primary">Fit Selected</button>
+      <button class="btn navbar-btn btn-outline-primary">Clear</button>
+      <button class="btn navbar-btn btn-outline-primary">sfn</button>
+
+    </div>
+  </nav>
+
+
+-->
+
+
+
+  <div id="outermostDiv"  class="container-fluid">
+    <div id="menubarDiv">
+      <button class="menubarButton" id="knockoutButton">Knockout</button>
+      <button class="menubarButton" id="restoreButton">Restore</button>
+      <button class="menubarButton" id="phoneTreeButton">Phone Tree...</button>
+      <button class="menubarButton" id="shortestPathButton">Shortest Path</button>
+      <button class="menubarButton" id="resetGraphButton">Reset Graph</button>
+      <button class="menubarButton" id="helpButton">Help</button>
+      <button class="menubarButton" id="fitButton">Fit</button>
+      <button class="menubarButton" id="fitSelectedButton">Fit Selected</button>
+      <button class="menubarButton" id="clearSelectionsButton">Clear</button>
+      <button class="menubarButton" id="sfnButton">SFN</button>
+      <span class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tutorials
+          <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a tabindex="-1" href="#">HTML</a></li>
+          <li><a tabindex="-1" href="#">CSS</a></li>
+          <li class="dropdown-submenu">
+            <a class="test" tabindex="-1" href="#">New dropdown <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+              <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+              <li class="dropdown-submenu">
+                <a class="test" href="#">Another dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">3rd level dropdown</a></li>
+                  <li><a href="#">3rd level dropdown</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </span>
+
+
+    </div> <!-- menubarDiv -->
+    <div id="cyDiv"></div>
+  </div> <!-- outermostDiv -->
+
+    <script>
+      $(document).ready(function(){
+      $('.dropdown-submenu a.test').on("click", function(e){
+      $(this).next('ul').toggle();
+      e.stopPropagation();
+      e.preventDefault();
+      });
+      });
+    </script>
+
+</body>
+</html>

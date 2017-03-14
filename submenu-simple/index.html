@@ -67,6 +67,11 @@
    font-size: 14px;
    }
 
+.newMenubarButton{
+   background-color: #EEE;
+   font-size: 14px;
+   }
+
 .navbar-btn: {
     color: #FFF;
     background-color: #DDDDDD !important;
@@ -79,49 +84,69 @@
     border-color: #2E6DA4 !important;
     }
 
+.rotate270 {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
 </style>
 
 </head>
 
 <body role="document">
 
-<!--
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">cellphone simulator</a>
-      </div>
-        <ul class="nav navbar-nav">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">About<span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li>
-                <a href="http://systemsbiology.org" target="_blank">Institute for Systems Biology</a>
-              </li>
-              <li>
-                <a href="https://www.systemsbiology.org/education-outreach/systems-education-experiences"
-                   target="_blank">Systems Education Experiences</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      <button class="btn navbar-btn btn-outline-primary">Shortest Path</button>
-      <button class="btn navbar-btn btn-outline-primary">Reset</button>
-      <button class="btn navbar-btn btn-outline-primary">Fit</button>
-      <button class="btn navbar-btn btn-outline-primary">Fit Selected</button>
-      <button class="btn navbar-btn btn-outline-primary">Clear</button>
-      <button class="btn navbar-btn btn-outline-primary">sfn</button>
-
-    </div>
-  </nav>
-
-
--->
-
-
 
   <div id="outermostDiv"  class="container-fluid">
     <div id="menubarDiv">
+
+      <span class="dropdown" style="margin: 3px;">
+        <button class="btn btn-default dropdown-toggle newMenubarButton" type="button"
+                data-toggle="dropdown">Knockout <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a tabindex="-1" href="#" id="knockoutSelected">Selected</a></li>
+
+          <li class="dropdown-submenu">
+            <a class="test" tabindex="-1" href="#">By Carrier <span class="rotate270 caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a tabindex="-1" href="#" id="knockoutSelected">T-Mobile</a></li>
+              <li><a tabindex="-1" href="#" id="knockoutByCarrier">Sprint</a></li>
+              <li><a tabindex="-1" href="#" id="knockoutByProperty">AT&T</a></li>
+            </ul>
+          </li>
+
+
+          <li class="dropdown-submenu">
+            <a class="test" tabindex="-1" href="#">By Property <span class="rotate270 caret"></span></a>
+            <ul class="dropdown-menu">
+              <li class="dropdown-submenu">
+                <a class="test" tabindex="-1" href="#">Phones with <span class="rotate270 caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a tabindex="-1" href="#" id="knockoutSelected">Email </a></li>
+                  <li><a tabindex="-1" href="#" id="knockoutByCarrier">Roaming</a></li>
+                  <li><a tabindex="-1" href="#" id="knockoutByProperty">Photo</a></li>
+                </ul>
+              </li>
+              <li class="dropdown-submenu">
+                <a class="test" tabindex="-1" href="#">Phones without <span class="rotate270 caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a tabindex="-1" href="#" id="knockoutSelected">Email </a></li>
+                  <li><a tabindex="-1" href="#" id="knockoutByCarrier">Roaming</a></li>
+                  <li><a tabindex="-1" href="#" id="knockoutByProperty">Photo</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+
+
+        </ul>
+</li>
+</ul>
+</span>
+
       <button class="menubarButton" id="knockoutButton">Knockout</button>
       <button class="menubarButton" id="restoreButton">Restore</button>
       <button class="menubarButton" id="phoneTreeButton">Phone Tree...</button>
@@ -132,28 +157,6 @@
       <button class="menubarButton" id="fitSelectedButton">Fit Selected</button>
       <button class="menubarButton" id="clearSelectionsButton">Clear</button>
       <button class="menubarButton" id="sfnButton">SFN</button>
-      <span class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tutorials
-          <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <li><a tabindex="-1" href="#">HTML</a></li>
-          <li><a tabindex="-1" href="#">CSS</a></li>
-          <li class="dropdown-submenu">
-            <a class="test" tabindex="-1" href="#">New dropdown <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
-              <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
-              <li class="dropdown-submenu">
-                <a class="test" href="#">Another dropdown <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">3rd level dropdown</a></li>
-                  <li><a href="#">3rd level dropdown</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </span>
 
 
     </div> <!-- menubarDiv -->
@@ -161,13 +164,16 @@
   </div> <!-- outermostDiv -->
 
     <script>
-      $(document).ready(function(){
-      $('.dropdown-submenu a.test').on("click", function(e){
-      $(this).next('ul').toggle();
-      e.stopPropagation();
-      e.preventDefault();
+     $(document).ready(function(){
+        $('.dropdown-submenu a.test').on("click", function(e){
+        $(this).next('ul').toggle();
+        e.stopPropagation();
+        e.preventDefault();
+        });
+      $("#knockout_2a").click(function() {console.log("2a")})
       });
-      });
+
+
     </script>
 
 </body>

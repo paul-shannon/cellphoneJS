@@ -182,6 +182,10 @@
      $("#knockoutMainMenuButton").on("click", function(e){
         console.log("main menu button: knockout");
         $("#knockoutMenuItems").toggle();
+          // whether showing or hiding the first level menu
+          // we always want the submenus hidden
+        $("#knockoutByPropertiesMenuItems").hide();
+        $("#knockoutByCarrierMenuItems").hide();
         });
 
      $("#knockoutWithoutPropertyMenuHead").on("click", function(e){

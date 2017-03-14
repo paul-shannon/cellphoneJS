@@ -102,6 +102,8 @@
   <div id="outermostDiv"  class="container-fluid">
     <div id="menubarDiv">
 
+      <!----------------------------------- the Knockout Menu   ----------------------------------------->
+
       <span class="dropdown" style="margin: 3px;">
         <button id="knockoutMainMenuButton" class="btn btn-default dropdown-toggle newMenubarButton" type="button"
                 data-toggle="dropdown">Knockout <span class="caret"></span></button>
@@ -147,8 +149,57 @@
         </ul>
       </span>
 
-      <button class="menubarButton" id="knockoutButton">Knockout</button>
-      <button class="menubarButton" id="restoreButton">Restore</button>
+      <!---------------------------------- the Reactive Menu   --------------------------------------------->
+
+      <span class="dropdown" style="margin: 3px;">
+        <button id="reactivateMainMenuButton" class="btn btn-default dropdown-toggle newMenubarButton" type="button"
+                data-toggle="dropdown">Reactivate <span class="caret"></span></button>
+
+        <ul id="reactivateMenuItems" class="dropdown-menu">
+
+          <li><a id="reactivateSelectedPhonesMenuItem" tabindex="-1" href="#" id="reactivateSelected">Selected</a></li>
+
+          <li class="dropdown-submenu phonesByCarrier-submenu">
+            <a id="reactivateByCarrierMenuHead" class="test" tabindex="-1" href="#">By Carrier <span class="rotate270 caret"></span></a>
+            <ul id="reactivateByCarrierMenuItems" class="dropdown-menu dropdown-submenu-items carriers-menu">
+              <li><a id="reactivateTMobilePhonesMenuItem" tabindex="-1" href="#" id="reactivateSelected">T-Mobile</a></li>
+              <li><a id="reactivateSprintPhonesMenuItem" tabindex="-1" href="#" id="reactivateByCarrier">Sprint</a></li>
+              <li><a id="reactivateATTPhonesMenuItem" tabindex="-1" href="#" id="reactivateByProperty">AT&T</a></li>
+            </ul>
+          </li>
+
+
+          <li class="dropdown-submenu phonesByProperty-submenu">
+            <a id="reactivateByPropertiesMenuHead" class="test" tabindex="-1" href="#">By Property <span class="rotate270 caret"></span></a>
+            <ul id="reactivateByPropertiesMenuItems" class="dropdown-menu dropdown-submenu-items properties-menu">
+              <li class="dropdown-submenu  phonesWithoutProperties-subsubmenu">
+                <a id="reactivateWithPropertyMenuHead" class="test" tabindex="-1" href="#">Phones with <span class="rotate270 caret"></span></a>
+                <ul id="reactivateWithPropertyMenuItems" class="dropdown-menu">
+                  <li><a id="reactivateWithEmailMenuItem" class="leafMenuItem" tabindex="-1" href="#" id="reactivateWithProperty_email">Email </a></li>
+                  <li><a id="reactivateWithRoamingMenuItem" class="leafMenuItem" tabindex="-1" href="#" id="reactivateWithProperty_roaming">Roaming</a></li>
+                  <li><a id="reactivateWithPhotolMenuItem" class="leafMenuItem" tabindex="-1" href="#" id="reactivateWithProperty_photo">Photo</a></li>
+                </ul>
+              </li>
+
+              <li class="dropdown-submenu phonesWithoutProperties-subsubmenu">
+                <a  id="reactivateWithoutPropertyMenuHead" class="test" tabindex="-1" href="#">Phones without <span class="rotate270 caret"></span></a>
+                <ul id="reactivateWithoutPropertyMenuItems" class="dropdown-menu">
+                  <li><a id="reactivateWithoutEmailMenuItem" class="leafMenuItem" tabindex="-1" href="#" id="reactivateWithProperty_email">Email </a></li>
+                  <li><a id="reactivateWithoutRoamingMenuItem" class="leafMenuItem" tabindex="-1" href="#" id="reactivateWithProperty_roaming">Roaming</a></li>
+                  <li><a id="reactivateWithoutPhotolMenuItem" class="leafMenuItem" tabindex="-1" href="#" id="reactivateWithProperty_photo">Photo</a></li>
+                </ul>
+              </li>
+
+            </ul>
+          </li>
+
+        </ul>
+      </span>
+
+      <!-------------------------------------------------------------------------------------------------->
+
+
+
       <button class="menubarButton" id="phoneTreeButton">Phone Tree...</button>
       <button class="menubarButton" id="shortestPathButton">Shortest Path</button>
       <button class="menubarButton" id="resetGraphButton">Reset Graph</button>
@@ -175,6 +226,17 @@
         $("#knockoutMenuItems").hide();
         }
 
+     function resetReactivateMenu(){
+        console.log("resetReactivateMenu");
+        $("#reactivateByCarrierMenuItems").hide();
+        //$("#reactivateWithoutPropertyMenuHead").hide()
+        $("#reactivateByPropertiesMenuItems").hide();
+        $("#reactivateWithPropertyMenuItems").hide();
+        //$("#reactivateWithoutPropertyMenuItems").hide();
+        $("#reactivateByCarrierMenuItems").hide();
+        $("#reactivateMenuItems").hide();
+        }
+
    $(document).ready(function(){
 
      $("#knockoutMainMenuButton").on("click", function(e){
@@ -184,6 +246,8 @@
           // we always want the submenus hidden
         $("#knockoutByPropertiesMenuItems").hide();
         $("#knockoutByCarrierMenuItems").hide();
+          // if another menu is up, hide it
+        $("#reactivateMenuItems").hide()
         });
 
      $("#knockoutWithoutPropertyMenuHead").on("click", function(e){
@@ -284,6 +348,121 @@
         console.log("with photo");
         resetKnockoutMenu();
         });
+
+     // reactivate menu code starts here
+
+     $("#reactivateMainMenuButton").on("click", function(e){
+        console.log("main menu button: reactivate");
+        $("#reactivateMenuItems").toggle();
+          // whether showing or hiding the first level menu
+          // we always want the submenus hidden
+        $("#reactivateByPropertiesMenuItems").hide();
+        $("#reactivateByCarrierMenuItems").hide();
+          // if another menu is up, hide it
+        $("#knockoutMenuItems").hide()
+
+        });
+
+     $("#reactivateWithoutPropertyMenuHead").on("click", function(e){
+        console.log("  phones without");
+        $(this).next('ul').toggle();
+        $("#reactivateWithPropertyMenuItems").hide();
+        });
+
+     $("#reactivateWithPropertyMenuHead").on("click", function(e){
+        console.log("  phones with");
+        $(this).next('ul').toggle();
+        $("#reactivateWithoutPropertyMenuItems").hide();
+        });
+
+     $('#reactivateSelectedPhonesMenuItem').on("click", function(e){
+        console.log("reactivateSelectedPhones");
+        resetReactivateMenu();
+        });
+
+     $("#reactivateByPropertiesMenuHead").on("click", function(e){
+        console.log("reactivateByPropertiesMenuHead click");
+          // toggle the "Phones with, Phones without submenu
+        $('#reactivateByPropertiesMenuItems').toggle()
+          // make sure the "By Carrier" menu is hidden
+        $("#reactivateByCarrierMenuItems").hide()
+          // make sure the sub-sub menus are both hidden
+        $("#reactivateWithPropertyMenuHead").next("ul").hide()
+        $("#reactivateWithoutPropertyMenuHead").next("ul").hide()
+        });
+
+     $('#reactivateByCarrierMenuHead').on("click", function(e){
+        console.log("reactivateByCarrierMenuHead click");
+        $("#reactivateByCarrierMenuItems").toggle()
+        $('#reactivateByPropertiesMenuItems').hide()
+          //e.stopPropagation();
+          //e.preventDefault();
+        });
+
+     /**********
+     $('.dropdown-submenu a.test').on("click", function(e){
+     console.log("submenu click");
+     console.log(e);
+     $(this).next('ul').toggle();
+     e.stopPropagation();
+     e.preventDefault();
+     });
+     ********/
+
+     $("#reactivateTMobilePhonesMenuItem").on("click", function(e){
+        console.log("reactivate t-mobile phones");
+        resetReactivateMenu();
+        });
+
+     $("#reactivateSprintPhonesMenuItem").on("click", function(e){
+        console.log("reactivate sprint phones");
+        resetReactivateMenu();
+        });
+
+     $("#reactivateATTPhonesMenuItem").on("click", function(e){
+        console.log("reactivate ATT phones");
+        resetReactivateMenu();
+        });
+
+     $('a.leafMenuItem').on("click", function(e){
+        console.log("leafMenuItem click");
+        console.log(e);
+        $(this).next('ul').toggle();
+        e.stopPropagation();
+        e.preventDefault();
+        });
+
+     $("#reactivateWithoutEmailMenuItem").on("click", function(e){
+        console.log("w/o email");
+        resetReactivateMenu();
+        });
+
+     $("#reactivateWithoutRoamingMenuItem").on("click", function(e){
+        console.log("w/o roaming");
+        resetReactivateMenu();
+        });
+
+     $("#reactivateWithoutPhotolMenuItem").on("click", function(e){
+        console.log("w/o photo");
+        resetReactivateMenu();
+        });
+
+     $("#reactivateWithEmailMenuItem").on("click", function(e){
+        console.log("with email");
+        resetReactivateMenu();
+        });
+
+     $("#reactivateWithRoamingMenuItem").on("click", function(e){
+        console.log("with roaming");
+        resetReactivateMenu();
+        });
+
+     $("#reactivateWithPhotolMenuItem").on("click", function(e){
+        console.log("with photo");
+        resetReactivateMenu();
+        });
+
+
 
      });
 

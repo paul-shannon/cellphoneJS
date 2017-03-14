@@ -200,62 +200,62 @@
         $("#knockoutWithoutPropertyMenuItems").hide();
         });
 
-        $('#knockoutSelectedPhonesMenuItem').on("click", function(e){
-           console.log("knockoutSelectedPhones");
-           resetKnockoutMenu();
-           });
+     $('#knockoutSelectedPhonesMenuItem').on("click", function(e){
+        console.log("knockoutSelectedPhones");
+        resetKnockoutMenu();
+        });
 
-        $("#knockoutByPropertiesMenuHead").on("click", function(e){
-           console.log("knockoutByPropertiesMenuHead click");
-              // toggle the "Phones with, Phones without submenu
-           $('#knockoutByPropertiesMenuItems').toggle()
-              // make sure the "By Carrier" menu is hidden
-           $("#knockoutByCarrierMenuItems").hide()
-              // make sure the sub-sub menus are both hidden
-           $("#knockoutWithPropertyMenuHead").next("ul").hide()
-           $("#knockoutWithoutPropertyMenuHead").next("ul").hide()
-           });
+     $("#knockoutByPropertiesMenuHead").on("click", function(e){
+        console.log("knockoutByPropertiesMenuHead click");
+          // toggle the "Phones with, Phones without submenu
+        $('#knockoutByPropertiesMenuItems').toggle()
+          // make sure the "By Carrier" menu is hidden
+        $("#knockoutByCarrierMenuItems").hide()
+          // make sure the sub-sub menus are both hidden
+        $("#knockoutWithPropertyMenuHead").next("ul").hide()
+        $("#knockoutWithoutPropertyMenuHead").next("ul").hide()
+        });
 
-        $('#knockoutByCarrierMenuHead').on("click", function(e){
-           console.log("knockoutByCarrierMenuHead click");
-           $("#knockoutByCarrierMenuItems").toggle()
-           $('#knockoutByPropertiesMenuItems').hide()
-           //e.stopPropagation();
-           //e.preventDefault();
-           });
+     $('#knockoutByCarrierMenuHead').on("click", function(e){
+        console.log("knockoutByCarrierMenuHead click");
+        $("#knockoutByCarrierMenuItems").toggle()
+        $('#knockoutByPropertiesMenuItems').hide()
+          //e.stopPropagation();
+          //e.preventDefault();
+        });
 
-        /**********
-        $('.dropdown-submenu a.test').on("click", function(e){
-           console.log("submenu click");
-           console.log(e);
-           $(this).next('ul').toggle();
-           e.stopPropagation();
-           e.preventDefault();
-           });
-          ********/
+     /**********
+     $('.dropdown-submenu a.test').on("click", function(e){
+     console.log("submenu click");
+     console.log(e);
+     $(this).next('ul').toggle();
+     e.stopPropagation();
+     e.preventDefault();
+     });
+     ********/
 
-       $("#knockoutTMobilePhonesMenuItem").on("click", function(e){
-          console.log("knockout t-mobile phones");
-          resetKnockoutMenu();
-          });
+     $("#knockoutTMobilePhonesMenuItem").on("click", function(e){
+        console.log("knockout t-mobile phones");
+        resetKnockoutMenu();
+        });
 
-       $("#knockoutSprintPhonesMenuItem").on("click", function(e){
-          console.log("knockout sprint phones");
-          resetKnockoutMenu();
-          });
+     $("#knockoutSprintPhonesMenuItem").on("click", function(e){
+        console.log("knockout sprint phones");
+        resetKnockoutMenu();
+        });
 
-       $("#knockoutATTPhonesMenuItem").on("click", function(e){
-          console.log("knockout ATT phones");
-          resetKnockoutMenu();
-          });
+     $("#knockoutATTPhonesMenuItem").on("click", function(e){
+        console.log("knockout ATT phones");
+        resetKnockoutMenu();
+        });
 
-        $('a.leafMenuItem').on("click", function(e){
-           console.log("leafMenuItem click");
-           console.log(e);
-           $(this).next('ul').toggle();
-           e.stopPropagation();
-           e.preventDefault();
-           });
+     $('a.leafMenuItem').on("click", function(e){
+        console.log("leafMenuItem click");
+        console.log(e);
+        $(this).next('ul').toggle();
+        e.stopPropagation();
+        e.preventDefault();
+        });
 
      $("#knockoutWithoutEmailMenuItem").on("click", function(e){
         console.log("w/o email");
@@ -287,10 +287,7 @@
         resetKnockoutMenu();
         });
 
-
-
-      $("#knockout_2a").click(function() {console.log("2a")})
-      });
+     });
 
 
     </script>

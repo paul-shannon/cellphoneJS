@@ -103,7 +103,7 @@
     <div id="menubarDiv">
 
       <span class="dropdown" style="margin: 3px;">
-        <button class="btn btn-default dropdown-toggle newMenubarButton" type="button"
+        <button id="knockoutMainMenuButton" class="btn btn-default dropdown-toggle newMenubarButton" type="button"
                 data-toggle="dropdown">Knockout <span class="caret"></span></button>
 
         <ul id="knockoutMenuItems" class="dropdown-menu">
@@ -123,7 +123,6 @@
           <li class="dropdown-submenu phonesByProperty-submenu">
             <a id="knockoutByPropertiesMenuHead" class="test" tabindex="-1" href="#">By Property <span class="rotate270 caret"></span></a>
             <ul id="knockoutByPropertiesMenuItems" class="dropdown-menu dropdown-submenu-items properties-menu">
-
               <li class="dropdown-submenu  phonesWithoutProperties-subsubmenu">
                 <a id="knockoutWithPropertyMenuHead" class="test" tabindex="-1" href="#">Phones with <span class="rotate270 caret"></span></a>
                 <ul id="knockoutWithPropertyMenuItems" class="dropdown-menu">
@@ -134,7 +133,7 @@
               </li>
 
               <li class="dropdown-submenu phonesWithoutProperties-subsubmenu">
-                <a id="knockoutWithoutPropertyMenuHead" class="test" tabindex="-1" href="#">Phones without <span class="rotate270 caret"></span></a>
+                <a  id="knockoutWithoutPropertyMenuHead" class="test" tabindex="-1" href="#">Phones without <span class="rotate270 caret"></span></a>
                 <ul id="knockoutWithoutPropertyMenuItems" class="dropdown-menu">
                   <li><a id="knockoutWithoutEmailMenuItem" class="leafMenuItem" tabindex="-1" href="#" id="knockoutWithProperty_email">Email </a></li>
                   <li><a id="knockoutWithoutRoamingMenuItem" class="leafMenuItem" tabindex="-1" href="#" id="knockoutWithProperty_roaming">Roaming</a></li>
@@ -169,26 +168,59 @@
     <script>
      function resetKnockoutMenu(){
         console.log("resetKnockoutMenu");
-        $("#knockoutByPropertiesMenuItems").hide();
         $("#knockoutByCarrierMenuItems").hide();
-        $("#knockoutMenuItems").hide()
+        //$("#knockoutWithoutPropertyMenuHead").hide()
+        $("#knockoutByPropertiesMenuItems").hide();
+        $("#knockoutWithPropertyMenuItems").hide();
+        //$("#knockoutWithoutPropertyMenuItems").hide();
+        $("#knockoutByCarrierMenuItems").hide();
+        $("#knockoutMenuItems").hide();
         }
 
    $(document).ready(function(){
+
+     $("#knockoutMainMenuButton").on("click", function(e){
+        console.log("main menu button: knockout");
+        $("#knockoutMenuItems").toggle();
+        });
+
+     $("#knockoutWithoutPropertyMenuHead").on("click", function(e){
+        console.log("  phones without");
+        $(this).next('ul').toggle();
+        $("#knockoutWithPropertyMenuItems").hide();
+        });
+
+     $("#knockoutWithPropertyMenuHead").on("click", function(e){
+        console.log("  phones with");
+        $(this).next('ul').toggle();
+        $("#knockoutWithoutPropertyMenuItems").hide();
+        });
+
         $('#knockoutSelectedPhonesMenuItem').on("click", function(e){
            console.log("knockoutSelectedPhones");
+           resetKnockoutMenu();
+           });
+
+        $("#knockoutByPropertiesMenuHead").on("click", function(e){
+           console.log("knockoutByPropertiesMenuHead click");
+              // toggle the "Phones with, Phones without submenu
+           $('#knockoutByPropertiesMenuItems').toggle()
+              // make sure the "By Carrier" menu is hidden
+           $("#knockoutByCarrierMenuItems").hide()
+              // make sure the sub-sub menus are both hidden
+           $("#knockoutWithPropertyMenuHead").next("ul").hide()
+           $("#knockoutWithoutPropertyMenuHead").next("ul").hide()
            });
 
         $('#knockoutByCarrierMenuHead').on("click", function(e){
            console.log("knockoutByCarrierMenuHead click");
-           $("#knockoutByPropertiesMenuItems").hide()
            $("#knockoutByCarrierMenuItems").toggle()
-           console.log(e);
-           $(this).next('ul').toggle();
+           $('#knockoutByPropertiesMenuItems').hide()
            //e.stopPropagation();
            //e.preventDefault();
            });
 
+        /**********
         $('.dropdown-submenu a.test').on("click", function(e){
            console.log("submenu click");
            console.log(e);
@@ -196,6 +228,7 @@
            e.stopPropagation();
            e.preventDefault();
            });
+          ********/
 
        $("#knockoutTMobilePhonesMenuItem").on("click", function(e){
           console.log("knockout t-mobile phones");

@@ -2,16 +2,16 @@
 function handleWindowResize ()
 {
    //console.log("--- entering handleWindowResize");
-   //console.log("outermostDiv: " + outermostDiv.width());   
-   //console.log("cyDiv:      " + cyDiv.width());   
+   //console.log("outermostDiv: " + outermostDiv.width());
+   //console.log("cyDiv:      " + cyDiv.width());
 
    var newHeight = $(window).height() - (menubarDiv.height() + 20);
    //cyDiv.width(0.75 * outermostDiv.width());
    cyDiv.height(newHeight)
 
    //console.log("--- leaving handleWindowResize");
-   //console.log("outermostDiv: " + outermostDiv.width());   
-   //console.log("cyDiv:      " + cyDiv.width());   
+   //console.log("outermostDiv: " + outermostDiv.width());
+   //console.log("cyDiv:      " + cyDiv.width());
 
 } // handleWindowResize
 //--------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ function enableDisableMenusBasedOnSelectedNodeCount()
        case 2:
           break;
        default:  // > 2 nodes selected
-          
+
        } // switch on selectedNodeCount
 
 } // enableDisableMenusBasedOnSelectedNodeCount
@@ -70,7 +70,7 @@ function selectShortestPath()
 {
   var selectedNodes = cyjs.nodes(":selected");
   if(selectedNodes.length == 2){
-     var d = cyjs.elements().dijkstra(selectedNodes[0])
+      var d = cyjs.elements().dijkstra({root: selectedNodes[0], directed: true});
      var path = d.pathTo(selectedNodes[1]);
      var nodesInPath = path.nodes();
      nodesInPath.select()
@@ -78,7 +78,7 @@ function selectShortestPath()
         nodesInPath[i].edgesWith(nodesInPath).select()
         } // for i
      } // if
-     
+
 
 } // selectShortestPath
 //----------------------------------------------------------------------------------------------------

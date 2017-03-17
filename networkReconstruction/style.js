@@ -47,28 +47,19 @@ vizmap = [
        }},
 
 
-   {selector:"edge[edgeType='oneWay']", css: {
-       "line-color": "rgb(50,50,50",
+   {selector:"edge", css: {
+       'line-color': "rgb(50,50,50)",
        'target-arrow-color': 'rgb(50,50,50)',
-      'target-arrow-shape': 'triangle',
+       'target-arrow-shape': 'triangle',
        "width": "1px",
-       'curve-style': 'bezier'
+       'curve-style': 'bezier',
+       'haystack-radius': 0.1
        }},
-
-    {selector:"edge[edgeType='reciprocal']", css: {
-        "line-color": "grey",
-        width: "2px",
-        "target-arrow-shape": "triangle",
-        "target-arrow-color": "black",
-        "source-arrow-shape": "triangle",
-        "source-arrow-color": "black",
-        'curve-style': 'bezier'
-    }},
 
     {"selector": "edge:selected", css: {
        "overlay-opacity": 0.2,
-        "overlay-color": "gray",
-        "width": "2px",
+       "overlay-color": "gray",
+       "width": "2px",
        }},
 
    ];

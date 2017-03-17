@@ -48,12 +48,13 @@ vizmap = [{
        }},
 
 
-   {selector:"edge[edgeType='oneWay']", css: {
+   {selector:"edge[edgeType='canCall']", css: {
        "line-color": "rgb(50,50,50",
        'target-arrow-color': 'rgb(50,50,50)',
       'target-arrow-shape': 'triangle',
        "width": "1px",
-       'curve-style': 'bezier'
+       'curve-style': 'bezier',
+       'haystack-radius': 0.5
        }},
 
     {selector:"edge[edgeType='reciprocal']", css: {
@@ -63,7 +64,8 @@ vizmap = [{
         "target-arrow-color": "black",
         "source-arrow-shape": "triangle",
         "source-arrow-color": "black",
-        'curve-style': 'bezier'
+        'curve-style': 'bezier',
+        'hsdfaystack-radius': 0.5
     }},
 
     {"selector": "edge:selected", css: {

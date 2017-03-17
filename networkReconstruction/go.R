@@ -11,7 +11,7 @@ tbl.edges$b <- tbl.nodes[match(tbl.edges$target, tbl.nodes$id), "name"]
 tbl.edges <- tbl.edges[, c("a", "b", "interaction")]
 colnames(tbl.edges) <- c("a", "b", "edgeType")
 stopifnot(all(tbl.edges$edgeType == "can call"))
-tbl.edges$edgeType <- "oneWay"
+tbl.edges$edgeType <- "canCall"
 
 edge.signature <- unlist(lapply(1:nrow(tbl.edges), function(i){
     nodes <- sort(c(tbl.edges$a[i], tbl.edges$b[i])); sprintf("%s:%s", nodes[1], nodes[2])}))
@@ -64,19 +64,21 @@ nodeData(g, tbl.nodes$name, "camera") <- tbl.nodes$camera
 nodeData(g, tbl.nodes$name, "roaming") <- tbl.nodes$roaming
 nodeData(g, tbl.nodes$name, "email") <- tbl.nodes$email
 
-tbl.edgesReciprocal <- subset(tbl.edges, reciprocal==TRUE)    # 46
-dups <- which(duplicated(tbl.edgesReciprocal$signature))
-tbl.edgesReciprocal <- tbl.edgesReciprocal[-dups,]
-tbl.edgesOneWay     <- subset(tbl.edges, reciprocal==FALSE)   # 47
 
-tbl.edgesReduced <- tbl.edges[-(which(duplicated(tbl.edges$signature))),]
+#tbl.edgesReciprocal <- subset(tbl.edges, reciprocal==TRUE)    # 46
+#dups <- which(duplicated(tbl.edgesReciprocal$signature))
+#tbl.edgesReciprocal <- tbl.edgesReciprocal[-dups,]
+#tbl.edgesOneWay     <- subset(tbl.edges, reciprocal==FALSE)   # 47
 
-g <- with(tbl.edgesReduced, graph::addEdge(a, b, g))
+#tbl.edgesReduced <- tbl.edges[-(which(duplicated(tbl.edges$signature))),]
 
+#edgeData(g, tbl.edges$a, tbl.edges$b, attr="edgeType") <- "reciprocal"
 #g2 <- with(tbl.edgesSub2, graph::addEdge(a, b, g2))
+#edgeData(g, tbl.edgesOneWay$a, tbl.edgesOneWay$b, attr="edgeType") <- "oneWay"
 
-edgeData(g, tbl.edgesReciprocal$a, tbl.edgesReciprocal$b, attr="edgeType") <- "reciprocal"
-edgeData(g, tbl.edgesOneWay$a, tbl.edgesOneWay$b, attr="edgeType") <- "oneWay"
+tbl.test <- head(tbl.edges[order(tbl.edges$signature),])
+g <- with(tbl.edges, graph::addEdge(a, b, g))
+edgeData(g, tbl.edges$a, tbl.edges$b, attr="edgeType") <- tbl.edges$edgeType
 
 
 rcy <- RCyjs(9000:9010, graph=g, quiet=TRUE)

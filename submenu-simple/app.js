@@ -34,7 +34,10 @@ $(document).ready(function(){
          },
       ready: function(){
         cyjs = this;
-        cyjs.on("select", function(){
+        cyjs.on("select", function(event){
+           if(cyjs.nodes(":selected").length == 1){
+             firstSelectedNode = event.cyTarget.id();
+             }
            enableDisableMenusBasedOnSelectedNodeCount();
            });
         cyjs.on("unselect", function(){
@@ -53,15 +56,22 @@ $(document).ready(function(){
 function enableDisableMenusBasedOnSelectedNodeCount()
 {
    var selectedNodeCount = cyjs.nodes(":selected").length
-    switch(selectedNodeCount){
-       case 0:
-         break;
-       case 1:
-         break;
-       case 2:
-          break;
-       default:  // > 2 nodes selected
+    if(selectedNodeCount > 0){
+      clearSelectionsButton.prop('disabled', false);
+      }
 
+   switch(selectedNodeCount){
+      case 0:
+       window.singleSelectedNode = null;
+       break;
+      case 1:
+         window.singleSelectedNode = cyjs.nodes(":selected").map(function(obj){return obj});
+         break;
+      case 2:
+         // turn on the "shortest path" button
+         break;
+      default:  // > 2 nodes selected
+         window.singleSelectedNode = null;
        } // switch on selectedNodeCount
 
 } // enableDisableMenusBasedOnSelectedNodeCount
@@ -69,16 +79,27 @@ function enableDisableMenusBasedOnSelectedNodeCount()
 function selectShortestPath()
 {
   var selectedNodes = cyjs.nodes(":selected");
-  if(selectedNodes.length == 2){
-      var d = cyjs.elements().dijkstra({root: selectedNodes[0], directed: true});
-     var path = d.pathTo(selectedNodes[1]);
-     var nodesInPath = path.nodes();
-     nodesInPath.select()
-     for(var i=0; i < nodesInPath.length; i++){
-        nodesInPath[i].edgesWith(nodesInPath).select()
-        } // for i
-     } // if
+  if(selectedNodes.length != 2){
+     return;
+     }
 
+   var selectedNodesIDs = selectedNodes.map(function(obj){return obj.id()});
+   var rootNode = window.singleSelectedNode;
+   var rootNodeID = rootNode[0].id();
+   var rootNodeIndex = selectedNodesIDs.indexOf(rootNodeID);
+   var targetNodeIndex = 1;
+   if(rootNodeIndex == 1){
+      targetNodeIndex = 0;  // just two possibilities, 0 or 1
+      }
+   var targetNode = selectedNodes[targetNodeIndex]
+   var d = cyjs.elements().dijkstra({root: rootNode, directed: true});
+   var path = d.pathTo(targetNode)
+   var nodesInPath = path.nodes();
+   nodesInPath.select()
+   var max = nodesInPath.length - 1;
+   for(var i=0; i < max; i++){
+       nodesInPath[i].edgesTo(nodesInPath[i+1]).select();
+      } // for i
 
 } // selectShortestPath
 //----------------------------------------------------------------------------------------------------
@@ -121,11 +142,14 @@ function setupMenus()
 
     clearSelectionsButton = $("#clearSelectionsButton");
     clearSelectionsButton.prop('disabled', true);
-    clearSelectionsButton.click(function(){cyjs.filter("node:selected").unselect()});
+    clearSelectionsButton.click(function(){
+       cyjs.nodes(":selected").unselect()
+       cyjs.edges(":selected").unselect()
+       });
 
     sfnButton = $("#sfnButton");
     sfnButton.prop('disabled', false);
-    sfnButton.click(function(){cyjs.nodes(':selected').neighborhood().nodes().select()});
+    sfnButton.click(function(){cyjs.nodes(":selected").outgoers().targets().select()});
 
 } // setupMenus
 //----------------------------------------------------------------------------------------------------

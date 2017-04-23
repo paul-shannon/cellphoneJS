@@ -22,7 +22,8 @@ $(document).ready(function(){
    outermostDiv = $("#outermostDiv");
    menubarDiv = $("#menubarDiv");
    handleWindowResize();
-   cyDiv.cytoscape({
+   var cy = cytoscape({
+      container: cyDiv,
       elements: network.elements,
       style: vizmap[0].style,  // the first style is the one we want
       showOverlay: false,

@@ -7,7 +7,7 @@
   },
   "keywords": [],
   "author": "Paul Shannon",
-  "repository": "https://github.com/paul-shannon/cellphoneJS/tree/master/webpack-version"
+  "repository": "https://github.com/paul-shannon/cellphoneJS/tree/master/webpack-version",
   "license": "ISC",
   "dependencies": {
     "bootstrap-loader": "^2.0.0",
@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "bootstrap": "^4.0.0-alpha.4",
+    "bootstrap-loader": "^2.0.0",
     "bootstrap-sass": "^3.3.7",
     "css-loader": "^0.28.0",
     "extract-text-webpack-plugin": "^2.1.0",
@@ -25,7 +26,15 @@
     "resolve-url-loader": "^2.0.2",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.16.1",
-    "url-loader": "^0.5.8"
+    "url-loader": "^0.5.8",
+    "webpack": "^2.4.1"
+  },
+  "peerDependencies": {
+    "css-loader": "*",
+    "node-sass": "*",
+    "resolve-url-loader": "*",
+    "sass-loader": "*",
+    "webpack": "*"
   },
   "description": "An educational webapp, illustrating network relationships."
 }

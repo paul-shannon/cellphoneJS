@@ -9,11 +9,12 @@ clean:
 	- rm -rf node_modules
 
 install:
-	npm init -y
-	npm install jquery --save
-	npm install webpack --save
-	npm install cytoscape
-	npm install style-loader css-loader --save-dev
+	npm install
+#	npm init -y
+#	npm install jquery --save
+#	npm install webpack --save
+#	npm install cytoscape --save
+#	npm install style-loader css-loader --save-dev
 
 
 

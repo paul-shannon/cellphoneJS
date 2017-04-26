@@ -7,7 +7,10 @@
   },
   "keywords": [],
   "author": "Paul Shannon",
-  "repository": "https://github.com/paul-shannon/cellphoneJS/tree/master/webpack-version",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paul-shannon/cellphoneJS/tree/master/webpack-version"
+  },
   "license": "ISC",
   "dependencies": {
     "bootstrap-loader": "^2.0.0",

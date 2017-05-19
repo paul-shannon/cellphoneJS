@@ -25,7 +25,7 @@ var cy = cytoscape({container: $("#cyDiv"),
                        tinyApp.enableDisableMenusBasedOnSelectedNodeCount(cy);
                        });
                     console.log("small cy network ready, with " + cy.nodes().length + " nodes.");
-                   cy.fit(50);
+                    setTimeout(function(){cy.fit(100);}, 0)
                    } // ready
                }); // cytoscape ctor
 
@@ -33,6 +33,7 @@ tinyApp.init(network)
 $(window).resize(tinyApp.handleWindowResize);
 tinyApp.handleWindowResize();
 tinyApp.setupMenus(cy);
+tinyApp.initialWindowConfiguration();
 window.cy = cy;
 
 

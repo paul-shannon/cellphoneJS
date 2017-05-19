@@ -3,10 +3,9 @@
 var sfnButton = null;
 var originalNetwork = null;
 var phoneTreeVisibility = 0.0;
-var cyjsVisibility = 1.0;
+var cyjsVisibility = 0.98;
 
 module.exports = {
-
 
     init: function(network){
           // use a cheap trick to clone the network - make an
@@ -110,6 +109,10 @@ module.exports = {
        sfnButton.click(function(){cy.nodes(":selected").outgoers().targets().select()});
        }, // setupMenus
 
+    initialWindowConfiguration: function(){
+       $("#phoneTreePanel").hide()
+       },
+
     enableDisableMenusBasedOnSelectedNodeCount: function(cy){
        var selectedNodeCount = cy.nodes(":selected").length
         if(selectedNodeCount > 0){
@@ -134,18 +137,20 @@ module.exports = {
        }, // enableDisableMenusBasedOnSelectedNodeCount
 
     togglePhoneTreePanel: function(obj) {
-        console.log("-- togglePhoneTreePanel");
-      var phoneTreePanelWidth = $("#phoneTreePanel").width()
-      if(phoneTreePanelWidth < 5){
-         phoneTreeVisibility = 0.30;
-         cyjsVisibility = 0.70;
+       var phoneTreePanelWidth = $("#phoneTreePanel").width()
+       if(phoneTreePanelWidth < 5){
+          $("#phoneTreePanel").show();
+          phoneTreeVisibility = 0.30;
+          cyjsVisibility = 0.68;
+          }
+       else{
+         phoneTreeVisibility = 0.0;
+         $("#phoneTreePanel").hide();
+         cyjsVisibility = 0.98;
          }
-      else{
-        phoneTreeVisibility = 0.0;
-        cyjsVisibility = 1.0;
-        }
-     obj.handleWindowResize()
-     } // togglePhoneTreePanel
+      obj.handleWindowResize();
+      setTimeout(function() {cy.fit(100);}, 500);
+      } // togglePhoneTreePanel
 
 } // module.exports
 

@@ -10,8 +10,8 @@ body {
 .dropdown-submenu .dropdown-menu {
    top: 0;
    left: 100%;
-    margin-top: -1px;
-    }
+   margin-top: -1px;
+   }
 
 #outermostDiv{
   width: 100%;
@@ -30,22 +30,29 @@ body {
   background-color: #EEE;
   }
 
+#mainDiv{
+  background-color: green;
+}
+
 #cyDiv{
- float: left;
-  margin: auto;
+    //display: inline-block;
+    float: left;
+  margin: 5px;
   width: 98%;
   height: 95%;
   border: 1px solid #444;
-  border-radius:5px;
+  border-radius: 5px;
   }
 
-#phoneTreeDiv{
- float: right;
-  margin: auto;
+#phoneTreePanel{
+  background-color: beige;
+  //visibility: hidden;
+  float:left;
+  margin: 5px;
   width: 0%;
   height: 95%;
-  border: 1px solid #444;
-  border-radius:5px;
+  border: 1px solid #400;
+  border-radius: 5px;
   }
 
 .menubarButton{

@@ -1,3 +1,5 @@
+var phoneTreeVisibility = 0.0;
+var cyjsVisibility = 1.0;
 //----------------------------------------------------------------------------------------------------
 function handleWindowResize ()
 {
@@ -6,7 +8,11 @@ function handleWindowResize ()
    //console.log("cyDiv:      " + cyDiv.width());
 
    var newHeight = $(window).height() - (menubarDiv.height() + 20);
-   //cyDiv.width(0.75 * outermostDiv.width());
+   var mainDivWidth = $("#mainDiv").width();
+
+   cyDiv.width(mainDivWidth * cyjsVisibility)
+   phoneTreeDiv.width(mainDivWidth * phoneTreeVisibility);
+
    cyDiv.height(newHeight)
 
    //console.log("--- leaving handleWindowResize");
@@ -114,6 +120,23 @@ function selectShortestPath()
 
 } // selectShortestPath
 //----------------------------------------------------------------------------------------------------
+function togglePhoneTreePanel()
+{
+   var phoneTreePanelWidth = $("#phoneTreePanel").width()
+
+   if(phoneTreePanelWidth < 5){
+       phoneTreeVisibility = 0.30;
+       cyjsVisibility = 0.70;
+      }
+    else{
+      phoneTreeVisibility = 0.0;
+      cyjsVisibility = 1.0;
+    }
+
+    handleWindowResize()
+
+} // togglePhoneTreePanel
+//----------------------------------------------------------------------------------------------------
 function setupMenus()
 {
     knockoutButton = $("#knockoutButton");
@@ -125,8 +148,11 @@ function setupMenus()
     restoreButton.click(function(){});
 
     phoneTreeButton = $("#phoneTreeButton");
-    phoneTreeButton.prop('disabled', true);
-    phoneTreeButton.click(function(){});
+    phoneTreeButton.prop('disabled', false);
+    phoneTreeButton.click(function(){
+       console.log("phone tree!");
+       togglePhoneTreePanel()
+       });
 
     shortestPathButton = $("#shortestPathButton");
     shortestPathButton.prop('disabled', false);

@@ -2,6 +2,8 @@
 
 var sfnButton = null;
 var originalNetwork = null;
+var phoneTreeVisibility = 0.0;
+var cyjsVisibility = 1.0;
 
 module.exports = {
 
@@ -17,7 +19,14 @@ module.exports = {
         var outermostDivHeight = $("#outermostDiv").height();
         var menubarHeight = $("#menubarDiv").height();
         var newHeight = outermostDivHeight - (menubarHeight + 20);
-        $("#cyDiv").height(newHeight)
+        var mainDivWidth = $("#mainDiv").width();
+
+        var cyDiv = $("#cyDiv");
+        var phoneTreePanel = $("#phoneTreePanel");
+
+        cyDiv.height(newHeight)
+        cyDiv.width(mainDivWidth * cyjsVisibility)
+        phoneTreePanel.width(mainDivWidth * phoneTreeVisibility);
         },
 
     selectShortestPath: function() {
@@ -57,8 +66,12 @@ module.exports = {
        restoreButton.click(function(){});
 
        phoneTreeButton = $("#phoneTreeButton");
-       phoneTreeButton.prop('disabled', true);
-       phoneTreeButton.click(function(){});
+       phoneTreeButton.prop('disabled', false);
+        var obj = this;
+       phoneTreeButton.click(function(){
+         console.log("phone tree!");
+           obj.togglePhoneTreePanel(obj);
+         });
 
        shortestPathButton = $("#shortestPathButton");
        shortestPathButton.prop('disabled', false);
@@ -95,9 +108,6 @@ module.exports = {
        sfnButton = $("#sfnButton");
        sfnButton.prop('disabled', true);
        sfnButton.click(function(){cy.nodes(":selected").outgoers().targets().select()});
-
-
-
        }, // setupMenus
 
     enableDisableMenusBasedOnSelectedNodeCount: function(cy){
@@ -121,9 +131,21 @@ module.exports = {
           default:  // > 2 nodes selected
              window.singleSelectedNode = null;
            } // switch on selectedNodeCount
-       } // enableDisableMenusBasedOnSelectedNodeCount
+       }, // enableDisableMenusBasedOnSelectedNodeCount
 
-
+    togglePhoneTreePanel: function(obj) {
+        console.log("-- togglePhoneTreePanel");
+      var phoneTreePanelWidth = $("#phoneTreePanel").width()
+      if(phoneTreePanelWidth < 5){
+         phoneTreeVisibility = 0.30;
+         cyjsVisibility = 0.70;
+         }
+      else{
+        phoneTreeVisibility = 0.0;
+        cyjsVisibility = 1.0;
+        }
+     obj.handleWindowResize()
+     } // togglePhoneTreePanel
 
 } // module.exports
 

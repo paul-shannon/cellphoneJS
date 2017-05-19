@@ -31,8 +31,18 @@ body {
   }
 
 #cyDiv{
+ float: left;
   margin: auto;
   width: 98%;
+  height: 95%;
+  border: 1px solid #444;
+  border-radius:5px;
+  }
+
+#phoneTreeDiv{
+ float: right;
+  margin: auto;
+  width: 0%;
   height: 95%;
   border: 1px solid #444;
   border-radius:5px;

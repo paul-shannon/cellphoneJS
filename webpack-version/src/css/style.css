@@ -46,7 +46,6 @@ body {
 
 #phoneTreePanel{
   background-color: beige;
-  //visibility: hidden;
   float:left;
   margin: 5px;
   width: 0%;
@@ -64,6 +63,11 @@ body {
 .newMenubarButton{
    background-color: #EEE;
    font-size: 14px;
+   }
+
+#phoneTreeButton{
+    float: right;
+    margin-right: 60px;
    }
 
 .navbar-btn: {
@@ -85,3 +89,23 @@ body {
     -ms-transform: rotate(-90deg);
     transform: rotate(-90deg);
 }
+
+
+#phoneTreePanel option{
+  font-size: 200%;
+  }
+
+#phoneTreeControlsDiv{
+  margin-top: 50px;
+  margin-left: 50px;
+  }
+
+#phoneTreeTableDiv{
+  margin-top: 30px;
+  margin-left: 100px;
+}
+
+.phoneTreeControlButton{
+    margin: 5px;
+}
+

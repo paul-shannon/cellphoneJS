@@ -1,19 +1,3 @@
-var sprintKnockedOutEdges = [];
-var tMobileKnockedOutEdges = [];
-var attKnockedOutEdges = [];
-var nextelKnockedOutEdges = [];
-var verizonKnockedOutEdges = [];
-var cellularOneKnockedOutEdges = [];
-var usCellularOneKnockedOutEdges = [];
-var selectedNodesKnockedOutEdges = [];
-
-var withEmailKnockedOutEdges = [];
-var withRoamingKnockedOutEdges = [];
-var withCameraKnockedOutEdges = [];
-
-var withoutEmailKnockedOutEdges = [];
-var withoutRoamingKnockedOutEdges = [];
-var withoutCameraKnockedOutEdges = [];
 
 function foo(){
     var x = 99;
@@ -68,7 +52,7 @@ module.exports = {
      $('#knockoutSelectedPhonesMenuItem').on("click", function(e){
         console.log("knockoutSelectedPhones");
         var selectedNodes = cy.nodes(":selected")
-        selectedNodesKnockedOutEdges = cy.remove(selectedNodes.connectedEdges())
+        selectedNodes.connectedEdges().hide();
         resetKnockoutMenu();
         });
 
@@ -92,96 +76,84 @@ module.exports = {
      $("#knockoutSprintPhonesMenuItem").on("click", function(e){
         console.log("knockout sprint phones");
         var carrierNodes = cy.nodes("[carrier='Sprint']");
-        sprintKnockedOutEdges = cy.remove(carrierNodes.connectedEdges())
+        carrierNodes.connectedEdges().hide()
         resetKnockoutMenu();
         });
 
-
      $("#reactivateSprintPhonesMenuItem").on("click", function(e){
-         console.log("reactivate sprint phones");
-         if(sprintKnockedOutEdges.length > 0){
-            cy.add(sprintKnockedOutEdges)
-            sprintKnockedOutEdges = [];
-            }
+        console.log("reactivate sprint phones");
+        var carrierNodes = cy.nodes("[carrier='Sprint']");
+        carrierNodes.connectedEdges().show();
         resetReactivateMenu();
         });
-
 
      $("#knockoutTMobilePhonesMenuItem").on("click", function(e){
         console.log("knockout t-mobile phones");
         var carrierNodes = cy.nodes("[carrier='T-Mobile']");
-        tMobileKnockedOutEdges = cy.remove(carrierNodes.connectedEdges())
+        carrierNodes.connectedEdges().hide()
         resetKnockoutMenu();
         });
 
       $("#knockoutATTPhonesMenuItem").on("click", function(e){
          console.log("knockout ATT phones");
          var carrierNodes = cy.nodes("[carrier='ATT']");
-         attKnockedOutEdges = cy.remove(carrierNodes.connectedEdges())
+         carrierNodes.connectedEdges().hide()
          resetKnockoutMenu();
          });
 
       $("#knockoutNextelPhonesMenuItem").on("click", function(e){
          console.log("knockout nextel phones");
          var carrierNodes = cy.nodes("[carrier='Nextel']");
-         nextelKnockedOutEdges = cy.remove(carrierNodes.connectedEdges())
+         carrierNodes.connectedEdges().hide()
          resetKnockoutMenu();
          });
 
       $("#knockoutVerizonPhonesMenuItem").on("click", function(e){
          console.log("knockout Verizon phones");
          var carrierNodes = cy.nodes("[carrier='Verizon Wireless']");
-         verizonKnockedOutEdges = cy.remove(carrierNodes.connectedEdges())
+         carrierNodes.connectedEdges().hide()
          resetKnockoutMenu();
          });
 
       $("#knockoutCellularOnePhonesMenuItem").on("click", function(e){
          console.log("knockout cellular one phones");
          var carrierNodes = cy.nodes("[carrier='CellularOne']");
-         cellularOneKnockedOutEdges = cy.remove(carrierNodes.connectedEdges())
+         carrierNodes.connectedEdges().hide()
          resetKnockoutMenu();
          });
 
       $("#knockoutUSCellularPhonesMenuItem").on("click", function(e){
          console.log("knockout us cellular phones");
          var carrierNodes = cy.nodes("[carrier='US Cellular']");
-         usCellularOneKnockedOutEdges = cy.remove(carrierNodes.connectedEdges())
+         carrierNodes.connectedEdges().hide()
          resetKnockoutMenu();
          });
 
       $("#reactivateNextelPhonesMenuItem").on("click", function(e){
          console.log("reactivate nextel phones");
-         if(nextelKnockedOutEdges.length > 0){
-            cy.add(nextelKnockedOutEdges)
-            nextelKnockedOutEdges = [];
-            }
+         var carrierNodes = cy.nodes("[carrier='Nextel']");
+         carrierNodes.connectedEdges().show();
          resetReactivateMenu();
          });
 
       $("#reactivateVerizonPhonesMenuItem").on("click", function(e){
          console.log("reactivate Verizon phones");
-         if(verizonKnockedOutEdges.length > 0){
-            cy.add(verizonKnockedOutEdges)
-            verizonKnockedOutEdges = [];
-            }
+         var carrierNodes = cy.nodes("[carrier='Verizon Wireless']");
+         carrierNodes.connectedEdges().show();
          resetReactivateMenu();
          });
 
       $("#reactivateCellularOnePhonesMenuItem").on("click", function(e){
          console.log("reactivate cellular one phones");
-         if(cellularOneKnockedOutEdges.length > 0){
-            cy.add(cellularOneKnockedOutEdges)
-            cellularOneKnockedOutEdges = [];
-            }
+         var carrierNodes = cy.nodes("[carrier='US Cellular']");
+         carrierNodes.connectedEdges().show();
          resetReactivateMenu();
          });
 
       $("#reactivateUSCellularPhonesMenuItem").on("click", function(e){
          console.log("reactivate us cellular phones");
-         if(usCellularOneKnockedOutEdges.length > 0){
-            cy.add(usCellularOneKnockedOutEdges)
-            usCellularOneKnockedOutEdges = [];
-            }
+         var carrierNodes = cy.nodes("[carrier='US Cellular']");
+         carrierNodes.connectedEdges().show();
          resetReactivateMenu();
          });
 
@@ -196,41 +168,41 @@ module.exports = {
      $("#knockoutWithoutEmailMenuItem").on("click", function(e){
         console.log("w/o email");
         var propertiedNodes = cy.filter(function(e){return (e.isNode() && !e.data("email"))});
-        withoutEmailKnockedOutEdges = cy.remove(propertiedNodes.connectedEdges())
+        propertiedNodes.connectedEdges().hide();
         resetKnockoutMenu();
         });
 
      $("#knockoutWithoutRoamingMenuItem").on("click", function(e){
         console.log("w/o roaming");
         var propertiedNodes = cy.filter(function(e){return (e.isNode() && !e.data("roaming"))});
-        withoutRoamingKnockedOutEdges = cy.remove(propertiedNodes.connectedEdges())
+        propertiedNodes.connectedEdges().hide();
         resetKnockoutMenu();
         });
 
      $("#knockoutWithoutPhotoMenuItem").on("click", function(e){
         console.log("w/o camera");
         var propertiedNodes = cy.filter(function(e){return (e.isNode() && !e.data("camera"))});
-        withoutCameraKnockedOutEdges = cy.remove(propertiedNodes.connectedEdges())
+         propertiedNodes.connectedEdges().hide();
         resetKnockoutMenu();
         });
 
      $("#knockoutWithEmailMenuItem").on("click", function(e){
         var propertiedNodes = cy.filter(function(e){return (e.isNode() && e.data("email"))});
-        withEmailKnockedOutEdges = cy.remove(propertiedNodes.connectedEdges())
+        propertiedNodes.connectedEdges().hide();
         resetKnockoutMenu();
         });
 
      $("#knockoutWithRoamingMenuItem").on("click", function(e){
         console.log("with roaming");
         var propertiedNodes = cy.filter(function(e){return (e.isNode() && e.data("roaming"))});
-        withRoamingKnockedOutEdges = cy.remove(propertiedNodes.connectedEdges())
+        propertiedNodes.connectedEdges().hide();
         resetKnockoutMenu();
         });
 
      $("#knockoutWithCameraMenuItem").on("click", function(e){
         console.log("with camera");
         var propertiedNodes = cy.filter(function(e){return (e.isNode() && e.data("camera"))});
-        withCameraKnockedOutEdges = cy.remove(propertiedNodes.connectedEdges())
+        propertiedNodes.connectedEdges().hide();
         resetKnockoutMenu();
         });
 
@@ -262,11 +234,8 @@ module.exports = {
 
      $('#reactivateSelectedPhonesMenuItem').on("click", function(e){
         console.log("reactivateSelectedPhones");
-        resetReactivateMenu();
-        if(selectedNodesKnockedOutEdges.length > 0){
-           cy.add(selectedNodesKnockedOutEdges)
-           selectedNodesKnockedOutEdges = [];
-           }
+        var selectedNodes = cy.nodes(":selected")
+         selectedNodes.connectedEdges().show();
         });
 
      $('#reactivateByCarrierMenuHead').on("click", function(e){
@@ -289,20 +258,15 @@ module.exports = {
 
      $("#reactivateTMobilePhonesMenuItem").on("click", function(e){
         console.log("reactivate t-mobile phones");
-        if(tMobileKnockedOutEdges.length > 0){
-           cy.add(tMobileKnockedOutEdges)
-           tMobileKnockedOutEdges = [];
-           }
+        var carrierNodes = cy.nodes("[carrier='T-Mobile']");
+        carrierNodes.connectedEdges().show();
         resetReactivateMenu();
         });
 
      $("#reactivateATTPhonesMenuItem").on("click", function(e){
-         if(attKnockedOutEdges.length > 0){
-            cy.add(attKnockedOutEdges)
-            attKnockedOutEdges = [];
-            }
-        console.log("reactivate ATT phones");
-        resetReactivateMenu();
+         var carrierNodes = cy.nodes("[carrier='ATT']");
+         carrierNodes.connectedEdges().show();
+         resetReactivateMenu();
         });
 
      $('a.leafMenuItem').on("click", function(e){
@@ -315,55 +279,43 @@ module.exports = {
 
      $("#reactivateWithoutEmailMenuItem").on("click", function(e){
         console.log("w/o email");
-        if(withoutEmailKnockedOutEdges.length > 0){
-           cy.add(withoutEmailKnockedOutEdges);
-           withoutEmailEmailKnockedOutEges = [];
-           }
+        var propertiedNodes = cy.filter(function(e){return (e.isNode() && e.data("email"))});
+        propertiedNodes.connectedEdges().show()
         resetReactivateMenu();
         });
 
      $("#reactivateWithoutRoamingMenuItem").on("click", function(e){
         console.log("w/o roaming");
-        if(withoutRoamingKnockedOutEdges.length > 0){
-           cy.add(withoutRoamingKnockedOutEdges);
-           withoutRoamingKnockedOutEges = [];
-           }
+        var propertiedNodes = cy.filter(function(e){return (e.isNode() && !e.data("roaming"))});
+        propertiedNodes.connectedEdges().show()
         resetReactivateMenu();
         });
 
      $("#reactivateWithoutPhotoMenuItem").on("click", function(e){
         console.log("w/o camera");
-        if(withoutCameraKnockedOutEdges.length > 0){
-           cy.add(withoutCameraKnockedOutEdges);
-           withoutCameraKnockedOutEges = [];
-           }
+        var propertiedNodes = cy.filter(function(e){return (e.isNode() && !e.data("camera"))});
+        propertiedNodes.connectedEdges().show()
         resetReactivateMenu();
         });
 
      $("#reactivateWithEmailMenuItem").on("click", function(e){
         console.log("with email");
-        if(withEmailKnockedOutEdges.length > 0){
-            cy.add(withEmailKnockedOutEdges);
-            withEmailKnockedOutEges = [];
-           }
+        var propertiedNodes = cy.filter(function(e){return (e.isNode() && e.data("email"))});
+        propertiedNodes.connectedEdges().show()
         resetReactivateMenu();
         });
 
      $("#reactivateWithRoamingMenuItem").on("click", function(e){
         console.log("with roaming");
-        if(withRoamingKnockedOutEdges.length > 0){
-            cy.add(withRoamingKnockedOutEdges);
-            withRoamingKnockedOutEdges = [];
-           }
+        var propertiedNodes = cy.filter(function(e){return (e.isNode() && e.data("roaming"))});
+        propertiedNodes.connectedEdges().show()
         resetReactivateMenu();
         });
 
      $("#reactivateWithCameraMenuItem").on("click", function(e){
         console.log("with camera");
-        if(withCameraKnockedOutEdges.length > 0){
-            cy.add(withCameraKnockedOutEdges);
-            withCameraKnockedOutEdges = [];
-           }
+        var propertiedNodes = cy.filter(function(e){return (e.isNode() && e.data("camera"))});
+        propertiedNodes.connectedEdges().show()
         resetReactivateMenu();
         });
 

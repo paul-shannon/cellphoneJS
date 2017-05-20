@@ -26,6 +26,7 @@ module.exports = {
         cyDiv.height(newHeight)
         cyDiv.width(mainDivWidth * cyjsVisibility)
         phoneTreePanel.width(mainDivWidth * phoneTreeVisibility);
+        phoneTreePanel.height(newHeight);
         },
 
     selectShortestPath: function() {
@@ -45,7 +46,7 @@ module.exports = {
         var targetNode = selectedNodes[targetNodeIndex]
         //var functioningNodes = cy.nodes("[status!='knockedOut']")
         //var d = functioningNodes.dijkstra({root: rootNode, directed: true});
-        var d = cy.elements().dijkstra({root: rootNode, directed: true});
+        var d = cy.elements(":visible").dijkstra({root: rootNode, directed: true});
         var path = d.pathTo(targetNode)
         var nodesInPath = path.nodes();
         nodesInPath.select()
@@ -107,7 +108,47 @@ module.exports = {
        sfnButton = $("#sfnButton");
        sfnButton.prop('disabled', true);
        sfnButton.click(function(){cy.nodes(":selected").outgoers().targets().select()});
+       this.setupPhoneTreeOperations();
        }, // setupMenus
+
+    setupPhoneTreeOperations: function(){
+       var stepButton = $("#phoneTreeStepButton");
+       var runButton = $("#phoneTreeRunButton");
+       var clearButton = $("#phoneTreeClearButton");
+       clearButton.click(this.resetPhoneTreeCounts);
+       stepButton.click(this.stepPhoneTree);
+       runButton.click(this.runPhoneTree);
+       },
+
+    resetPhoneTreeCounts: function(){
+       console.log("resetPhoneTreeCounts")
+       var nodeIDs = cy.nodes().map(function(node){return node.id()});
+       for(n=0; n < nodeIDs.length; n++){
+          var readoutString = "#phoneTreeReadout_" + nodeIDs[n];
+          $(readoutString).val(0);
+          } // for
+       },
+
+    stepPhoneTree: function(){
+       console.log("stepPhoneTree")
+       console.log("1 selected node? " + cy.nodes(":selected").length);
+       var nextNodesToCall = cy.nodes(":selected").outgoers().targets()
+       for(n=0; n < nextNodesToCall.length; n++){
+          var node = nextNodesToCall[n];
+          var id = node.id();
+          var readoutString = "#phoneTreeReadout_" + id;
+          var updatedCount = parseInt($(readoutString).val()) + 1;
+          $(readoutString).val(updatedCount);
+          node.select();
+          } // for n
+       },
+
+    runPhoneTree: function(){
+       console.log("runPhoneTree")
+       console.log("1 selected node? " + cy.nodes(":selected").length);
+       var nextNodesToCall = cy.nodes(":selected").outgoers().targets()
+
+       },
 
     initialWindowConfiguration: function(){
        $("#phoneTreePanel").hide()

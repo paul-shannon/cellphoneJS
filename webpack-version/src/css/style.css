@@ -92,17 +92,17 @@ body {
 
 
 #phoneTreePanel option{
-  font-size: 200%;
+  font-size: 100%;
   }
 
 #phoneTreeControlsDiv{
-  margin-top: 50px;
-  margin-left: 50px;
+  margin-top: 10px;
+  margin-left: 20px;
   }
 
 #phoneTreeTableDiv{
-  margin-top: 30px;
-  margin-left: 100px;
+  margin-top: 5px;
+  margin-left: 20px;
 }
 
 .phoneTreeControlButton{

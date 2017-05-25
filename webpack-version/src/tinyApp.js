@@ -151,7 +151,8 @@ module.exports = {
        },
 
     initialWindowConfiguration: function(){
-       $("#phoneTreePanel").hide()
+       $("#phoneTreePanel").hide();
+       cy.fit(100);
        },
 
     enableDisableMenusBasedOnSelectedNodeCount: function(cy){

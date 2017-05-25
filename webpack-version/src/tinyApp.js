@@ -4,6 +4,7 @@ var sfnButton = null;
 var originalNetwork = null;
 var phoneTreeVisibility = 0.0;
 var cyjsVisibility = 0.98;
+var phoneTreeNodesAlreadyContacted = [];
 
 module.exports = {
 
@@ -56,7 +57,7 @@ module.exports = {
            } // for i
         }, // selectShortestPath
 
-    setupMenus: function(cy){
+    setupMenus: function(){
        knockoutButton = $("#knockoutButton");
        knockoutButton.prop('disabled', true);
        knockoutButton.click(function(){});
@@ -103,6 +104,7 @@ module.exports = {
        clearSelectionsButton.click(function(){
           cy.nodes(":selected").unselect()
           cy.edges(":selected").unselect()
+          phoneTreeNodesAlreadyContacted = [];
           });
 
        sfnButton = $("#sfnButton");
@@ -115,9 +117,10 @@ module.exports = {
        var stepButton = $("#phoneTreeStepButton");
        var runButton = $("#phoneTreeRunButton");
        var clearButton = $("#phoneTreeClearButton");
-       clearButton.click(this.resetPhoneTreeCounts);
-       stepButton.click(this.stepPhoneTree);
-       runButton.click(this.runPhoneTree);
+       var obj = this;
+       clearButton.click(obj.resetPhoneTreeCounts);
+        stepButton.click(obj.stepPhoneTree);
+       // runButton.click(this.runPhoneTree);
        },
 
     resetPhoneTreeCounts: function(){
@@ -130,18 +133,37 @@ module.exports = {
        },
 
     stepPhoneTree: function(){
-       console.log("stepPhoneTree")
+       console.log("stepPhoneTree, cy: ")
+       console.log(cy);
+       var selectedNodes = cy.nodes(":selected");
        console.log("1 selected node? " + cy.nodes(":selected").length);
-       var nextNodesToCall = cy.nodes(":selected").outgoers().targets()
-       for(n=0; n < nextNodesToCall.length; n++){
-          var node = nextNodesToCall[n];
-          var id = node.id();
-          var readoutString = "#phoneTreeReadout_" + id;
-          var updatedCount = parseInt($(readoutString).val()) + 1;
-          $(readoutString).val(updatedCount);
-          node.select();
+       if(selectedNodes.length == 0){
+          return;
+          }
+       if(selectedNodes.length == 1) {
+          phoneTreeNodesAlreadyContacted = [selectedNodes];
+          }
+       console.log("--- about to make nonredundant phone calls from currently selected nodes, count: " + selectedNodes.length);
+         // brute force: no check yet to see if we have called from any node before
+       for(var n=0; n<selectedNodes.length; n++){
+          var callingNode = selectedNodes[n];
+          var callindNodeID = callingNode.id()
+          var nextNodesToCall = callingNode.outgoers().targets().filter(":unselected");
+          for(nOut=0; nOut < nextNodesToCall.length; nOut++){
+             var nodeToCall = nextNodesToCall[nOut];
+             var nodeToCallID = nodeToCall.id()
+
+             var readoutString = "#phoneTreeReadout_outgoing_" + callingNodeID;
+             var updatedCount = parseInt($(readoutString).val()) + 1;
+             $(readoutString).val(updatedCount);
+
+             var readoutString = "#phoneTreeReadout_incoming_" + nodeToCallID;
+             var updatedCount = parseInt($(readoutString).val()) + 1;
+             $(readoutString).val(updatedCount);
+             nodeToCall.select();
+             } // for nOut
           } // for n
-       },
+       }, // stepPhoneTree
 
     runPhoneTree: function(){
        console.log("runPhoneTree")
@@ -152,23 +174,25 @@ module.exports = {
 
     initialWindowConfiguration: function(){
        $("#phoneTreePanel").hide();
-       cy.fit(100);
        },
 
     enableDisableMenusBasedOnSelectedNodeCount: function(cy){
        var selectedNodeCount = cy.nodes(":selected").length
-        if(selectedNodeCount > 0){
+       console.log("tinyApp.enableDisable, selectedNodeCount: " + selectedNodeCount);
+       if(selectedNodeCount > 0){
           clearSelectionsButton.prop('disabled', false);
+          $("#phoneTreeStepButton").prop("disabled", false);
           sfnButton.prop("disabled", false);
           }
        switch(selectedNodeCount){
           case 0:
              window.singleSelectedNode = null;
-             sfnButton.prop("disabled", true);
+             //$("#phoneTreeStepButton").prop("disabled", true);
              break;
           case 1:
              window.singleSelectedNode = cy.nodes(":selected").map(function(obj){return obj});
              sfnButton.prop("disabled", false);
+             $("#phoneTreeStepButton").prop("disabled", false);
              break;
           case 2:
              // turn on the "shortest path" button

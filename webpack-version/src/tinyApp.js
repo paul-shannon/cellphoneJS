@@ -5,6 +5,7 @@ var originalNetwork = null;
 var phoneTreeVisibility = 0.0;
 var cyjsVisibility = 0.98;
 var phoneTreeNodesAlreadyContacted = [];
+var phoneTreeStepCount = 0;
 
 module.exports = {
 
@@ -82,6 +83,11 @@ module.exports = {
        resetGraphButton.prop('disabled', false);
         resetGraphButton.click(function(){
           cy.add(originalNetwork.elements)
+          cy.nodes().show()
+          cy.edges().show();
+          cy.nodes().unselect()
+          cy.edges().unselect();
+          cy.fit(50);
           });
 
        helpButton = $("#helpButton");
@@ -109,7 +115,7 @@ module.exports = {
 
        sfnButton = $("#sfnButton");
        sfnButton.prop('disabled', true);
-       sfnButton.click(function(){cy.nodes(":selected").outgoers().targets().select()});
+       sfnButton.click(function(){cy.nodes(":selected").outgoers().edges(":visible").targets().select()});
        this.setupPhoneTreeOperations();
        }, // setupMenus
 
@@ -126,8 +132,14 @@ module.exports = {
     resetPhoneTreeCounts: function(){
        console.log("resetPhoneTreeCounts")
        var nodeIDs = cy.nodes().map(function(node){return node.id()});
+       cy.nodes().unselect();
+       phoneTreeStepCount = 0;
+       $("#phoneTreeStepCountReadout").val(0);
        for(n=0; n < nodeIDs.length; n++){
           var readoutString = "#phoneTreeReadout_" + nodeIDs[n];
+          var readoutString = "#phoneTreeReadout_outgoing_" + nodeIDs[n];
+          $(readoutString).val(0);
+          readoutString = "#phoneTreeReadout_incoming_" + nodeIDs[n];
           $(readoutString).val(0);
           } // for
        },
@@ -140,15 +152,17 @@ module.exports = {
        if(selectedNodes.length == 0){
           return;
           }
-       if(selectedNodes.length == 1) {
-          phoneTreeNodesAlreadyContacted = [selectedNodes];
-          }
+      // if(selectedNodes.length == 1) {
+      //    phoneTreeNodesAlreadyContacted = [selectedNodes];
+      //    }
        console.log("--- about to make nonredundant phone calls from currently selected nodes, count: " + selectedNodes.length);
          // brute force: no check yet to see if we have called from any node before
+       phoneTreeStepCount += 1;
+       $("#phoneTreeStepCountReadout").val(phoneTreeStepCount);
        for(var n=0; n<selectedNodes.length; n++){
           var callingNode = selectedNodes[n];
-          var callindNodeID = callingNode.id()
-          var nextNodesToCall = callingNode.outgoers().targets().filter(":unselected");
+          var callingNodeID = callingNode.id()
+          var nextNodesToCall = callingNode.outgoers().edges(":visible").targets().filter(); // ":unselected");
           for(nOut=0; nOut < nextNodesToCall.length; nOut++){
              var nodeToCall = nextNodesToCall[nOut];
              var nodeToCallID = nodeToCall.id()

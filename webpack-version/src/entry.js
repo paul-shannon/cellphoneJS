@@ -32,8 +32,9 @@ var cy = cytoscape({container: $("#cyDiv"),
 tinyApp.init(network)
 $(window).resize(tinyApp.handleWindowResize);
 tinyApp.handleWindowResize();
-tinyApp.setupMenus(cy);
+tinyApp.setupMenus();
 tinyApp.initialWindowConfiguration();
+
 window.cy = cy;
 
 

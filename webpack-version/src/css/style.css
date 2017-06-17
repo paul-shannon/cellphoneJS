@@ -30,30 +30,6 @@ body {
   background-color: #EEE;
   }
 
-#mainDiv{
-  background-color: green;
-}
-
-#cyDiv{
-    //display: inline-block;
-    float: left;
-  margin: 5px;
-  width: 98%;
-  height: 95%;
-  border: 1px solid #444;
-  border-radius: 5px;
-  }
-
-#phoneTreePanel{
-  background-color: beige;
-  float:left;
-  margin: 5px;
-  width: 0%;
-  height: 95%;
-  border: 1px solid #400;
-  border-radius: 5px;
-  }
-
 .menubarButton{
    margin-top: 7px;
    margin-left: 5px;
@@ -90,22 +66,72 @@ body {
     transform: rotate(-90deg);
 }
 
+#mainDiv{;
+    width:100%;
+    height: 100%;
+    float: left;
+}
 
-#phoneTreePanel option{
-  font-size: 100%;
+#cyDiv{
+  display: inline-block;
+  float: left;
+  margin: 5px;
+  width: 70%;
+  height: 95%;
+  border: 1px solid #444;
+  border-radius: 5px;
+  }
+
+#panelDiv { // renamed from "phoneTreePanel"
+  display: inline-block;
+  box-sizing: border-box;
+  background-color: beige;
+  float: left;
+  margin: 5px;
+  margin-right: 0px;
+  width: 28%;
+  border: 1px solid #400;
+  border-radius: 5px;
+}
+
+h2 {
+    Font-size: 15;
+}
+
+#phoneTreePanel{
+    font-size: 100%;
+    display: inline-block;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: auto;
   }
 
 #phoneTreeControlsDiv{
-  margin-top: 10px;
-  margin-left: 20px;
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
   }
 
 #phoneTreeTableDiv{
-  margin-top: 5px;
-  margin-left: 20px;
+    box-sizing: border-box;
+    display: inline-block;
+    width: 100%;
+    height: 80%;
+    margin-top: 5px;
 }
 
 .phoneTreeControlButton{
     margin: 5px;
 }
 
+#counter {
+    width: 300px;
+    height: 100px;
+    margin: 0.5%;
+    display: inline-block;
+}
+
+table, td, th {
+    padding: 0px;
+    border-spacing: 0px;
+}

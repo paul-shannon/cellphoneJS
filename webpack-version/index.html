@@ -117,15 +117,28 @@
       <!-------------------------------------------------------------------------------------------------->
 
 
-
-      <button class="menubarButton" id="shortestPathButton">Shortest Path</button>
-      <button class="menubarButton" id="resetGraphButton">Reset Graph</button>
-      <button class="menubarButton" id="helpButton">Help</button>
-      <button class="menubarButton" id="fitButton">Fit</button>
-      <button class="menubarButton" id="fitSelectedButton">Fit Selected</button>
-      <button class="menubarButton" id="clearSelectionsButton">Clear</button>
-      <button class="menubarButton" id="sfnButton">SFN</button>
-      <button class="menubarButton" id="phoneTreeButton">Statistics</button>
+      <button class="menubarButton" id="shortestPathButton">Shortest Path
+        <span class="buttonHelpText">Select <strong>two</strong> nodes, using "Shift" key, and find the shortest path between them</span> 
+      </button>
+      <button class="menubarButton" id="resetGraphButton">Reset Graph
+        <span class="buttonHelpText">Reset <strong>sizing</strong> & reactivate "knockouts"</span>
+      </button>
+      <button class="menubarButton" id="helpButton">Help</button> 
+      <button class="menubarButton" id="fitButton">Fit
+        <span class="buttonHelpText">Fit graph to current window size</span>
+      </button>
+      <button class="menubarButton" id="fitSelectedButton">Fit Selected
+        <span class="buttonHelpText">Selected nodes are fit to current  window size</span>
+      </button>
+      <button class="menubarButton" id="clearSelectionsButton">Clear
+        <span class="buttonHelpText">Unselect all nodes</span>
+      </button>
+      <button class="menubarButton" id="sfnButton">SFN
+        <span class="buttonHelpText"><strong>S</strong>elect <strong>F</strong>irst <strong>N</strong>eighbor propogates "calls" from selected nodes</span>
+      </button>
+     <button class="menubarButton" id="phoneTreeButton">Statistics
+        <span class="buttonHelpText">Open incoming and outgoing call statistics</span>
+      </button>
     </div> <!-- menubarDiv -->
 
     <div id="mainDiv">
@@ -134,7 +147,7 @@
       <div id="panelDiv">
   <div id="phoneTreePanel">
 
-    <center><h2>Phone Tree Stats</h2></center>
+    <center><h2>Statistics</h2></center>
     <div id="phoneTreeControlsDiv">
     <center><table id="stepClear"></center>
       <!--tr><td>Delay &nbsp; </td>

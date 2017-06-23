@@ -68,7 +68,7 @@ module.exports = {
        restoreButton.prop('disabled', true);
        restoreButton.click(function(){});
 
-       phoneTreeButton = $("#phoneTreeButton");
+	phoneTreeButton = $("#phoneTreeButton");
        phoneTreeButton.prop('disabled', false);
         var obj = this;
        phoneTreeButton.click(function(){
@@ -91,7 +91,7 @@ module.exports = {
           cy.fit(50);
           });
 
-       helpButton = $("#helpButton");
+       helpButton = $("#helpButton").hide();
        helpButton.click(function(){});
 
        fitButton = $("#fitButton");

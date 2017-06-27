@@ -22,9 +22,19 @@ function resetReactivateMenu (){
         $("#reactivateMenuItems").hide();
 };
 
+
 module.exports = {
 
     init: function(){
+	
+     $("#cyDiv").on("click", function(e) {
+        if($("#knockoutMenuItems").is(":visible") || $("#reactivateMenuItems").is(":visible")) {
+          $("#knockoutMenuItems").hide();
+	  $("#reactivateMenuItems").hide();
+	  }  // hide the menus if visible
+        e.stopPropagation();
+	e.preventDefault(); // propagation still occurs, but it seems inconsequential in this context
+        });
 
      $("#knockoutMainMenuButton").on("click", function(e){
         console.log("main menu button: knockout");

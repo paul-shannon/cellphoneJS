@@ -4,7 +4,7 @@ body {
 
 
 .dropdown-submenu {
-   position: relative;
+    position: relative;
    }
 
 .dropdown-submenu .dropdown-menu {
@@ -37,7 +37,7 @@ body {
    }
 
 .newMenubarButton{
-   background-color: #EEE;
+   background-color: #FFF;
    font-size: 14px;
    }
 

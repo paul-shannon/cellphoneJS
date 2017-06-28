@@ -37,7 +37,7 @@ body {
    }
 
 .newMenubarButton{
-   background-color: #FFF;
+   background-color: #EEE;
    font-size: 14px;
    }
 
@@ -82,6 +82,44 @@ body {
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
+}
+
+@-moz-document url-prefix() {
+    .buttonHelpText {
+    visibility: hidden;
+    width: 120px;
+    margin-top: 24px;
+    margin-left: -70px;
+    background-color: white;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    border: 1px solid black;
+    padding: 5px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    }
+}
+
+.webkit {
+    .buttonHelpText {
+    visibility: hidden;
+    width: 120px;
+    margin-top: 24px;
+    margin-left: -70px;
+    background-color: white;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    border: 1px solid black;
+    padding: 5px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    }
 }
 
 .menubarButton:hover .buttonHelpText {

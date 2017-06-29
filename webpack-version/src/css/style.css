@@ -103,7 +103,7 @@ body {
     }
 }
 
-.webkit {
+.webkit{
     .buttonHelpText {
     visibility: hidden;
     width: 120px;

@@ -1,4 +1,4 @@
-// tinyApp.js
+// tinyApp.js -- renamed to app.js
 
 var sfnButton = null;
 var originalNetwork = null;

@@ -4,6 +4,7 @@ var sfnButton = null;
 var originalNetwork = null;
 var phoneTreeVisibility = 0.0;
 var cyjsVisibility = 0.98;
+window.cyjsv = cyjsVisibility;
 var phoneTreeNodesAlreadyContacted = [];
 var phoneTreeNodesAlreadyVisited = [];
 var phoneTreeStepCount = 0;
@@ -14,7 +15,8 @@ module.exports = {
           // use a cheap trick to clone the network - make an
           // entirely distinct copy.
        originalNetwork = JSON.parse(JSON.stringify(network));
-       console.log("hello fromm tinyApp.init");
+       console.log("hello fromm cellphone simulator.init");
+       $("#phoneTreeButton").trigger("click")
        },
 
     handleWindowResize: function(){
@@ -68,7 +70,7 @@ module.exports = {
        restoreButton.prop('disabled', true);
        restoreButton.click(function(){});
 
-	phoneTreeButton = $("#phoneTreeButton");
+       phoneTreeButton = $("#phoneTreeButton");
        phoneTreeButton.prop('disabled', false);
         var obj = this;
        phoneTreeButton.click(function(){
@@ -211,7 +213,11 @@ module.exports = {
        },
 
     initialWindowConfiguration: function(){
-       $("#phoneTreePanel").hide();
+         // reviewers tell us that the phone tree statistics panel should
+         // always be open.  not quite believing them :} we instead
+         // simply start the app with a programmatic button click
+         // to open that side panel.
+       $("#phoneTreeButton").trigger("click")
        },
 
     enableDisableMenusBasedOnSelectedNodeCount: function(cy){
